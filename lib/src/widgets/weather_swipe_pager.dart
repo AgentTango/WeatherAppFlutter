@@ -3,6 +3,36 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import '../model/weather.dart';
 import '../widgets/current_conditions.dart';
 import '../widgets/empty_widget.dart';
+import 'package:fcharts/fcharts.dart';
+
+
+class SimpleLineChart extends StatelessWidget {
+  // X value -> Y value
+  static const myData = [
+    ["A", "A"],
+    ["B", "B"],
+    ["C", "C"],
+    ["D", "B"],
+    ["E", "C"],
+    ["F", "C"],
+    ["G", "A"],
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return new LineChart(
+      lines: [
+        new Line<List<String>, String, String>(
+          data: myData,
+          xFn: (datum) => datum[0],
+          yFn: (datum) => datum[1],
+        ),
+      ],
+      chartPadding: new EdgeInsets.fromLTRB(30.0, 10.0, 10.0, 30.0),
+    );
+  }
+}
+
 
 
 class WeatherSwipePager extends StatelessWidget {
@@ -20,7 +50,7 @@ class WeatherSwipePager extends StatelessWidget {
           if (index == 0) {
             return CurrentConditions();
           } else if (index == 1) {
-            return Text("Line Chart");
+            return SimpleLineChart();
           }
           return EmptyWidget();
         },
